@@ -8,11 +8,17 @@ activeROM = sys.argv[2]
 print("activeROM is currently:(" + activeROM + ")")
 from subprocess import Popen
 
-isGamepad = bool(False)
+isGamepad1 = bool(False)
+isGamepad2 = bool(False)
+isGamepad3 = bool(False)
+isGamepad4 = bool(False)
+isGamepad1Done = bool(False)
+isGamepad2Done = bool(False)
+isGamepad3Done = bool(False)
+isGamepad4Done = bool(False)
+
 eventNum = 1
-tryLoops = 0
 controllerPath = '/dev/input/event'
-isAllowed = bool(False)
 isQjoypad = bool(False)
 procQjoypad = '/usr/bin/qjoypad'
 
@@ -25,45 +31,133 @@ gpSega = 'SWITCH CO.,LTD. USB Gamepad'
 gpXBOX1 = 'Generic X-Box pad'
 gpLogitech = 'Logitech Gamepad F310'
 
-#assigning gamepad as first viable controller detected
-while isGamepad == False:
-	tryLoops += 1
-	print("Proceeding with attempt #" + str(tryLoops))		
+#assigning gamepads as valid controller devices
+while isGamepad1Done == False:
+	print("Checking: (" + controllerPath + str(eventNum) + ") for gamepad1")		
 	try:
-		gamepad = InputDevice(controllerPath + str(eventNum))
-		isGamepad = bool(True)
+		gamepad1 = InputDevice(controllerPath + str(eventNum))
+		isGamepad1 = bool(True)
 	except:
 		print("Tried to assign gamepad as an invalid device")
 		eventNum += 1
 	
-	if isGamepad == True:
-		if (gamepad.name == gpPS3 or gamepad.name == gpGC or gamepad.name == gpSwitchPro or gamepad.name == gpSwitchPro2 or gamepad.name == gpSega or gamepad.name == gpLogitech or gamepad.name == gpXBOX1):
-			print("gamepad is = "+ gamepad.name)
+	#found a valid device, checking if controller is recognized
+	if isGamepad1 == True:
+		if (gamepad1.name == gpPS3 or gamepad1.name == gpGC or gamepad1.name == gpSwitchPro or gamepad1.name == gpSwitchPro2 or gamepad1.name == gpSega or gamepad1.name == gpLogitech or gamepad1.name == gpXBOX1):
+			print("gamepad1 is = "+ gamepad1.name)
+			isGamepad1Done = bool(True)
+			eventNum += 1
 		else :
 			print("Input device not recognized within the whitelist")
 			eventNum += 1
-			isGamepad = bool(False)
+			isGamepad1 = bool(False)
+	
+	#stop looking for controllers beyond event30
+	if eventNum >= 30:
+		print("Could not find a valid controller to assign to gamepad1")
+		isGamepad1Done = bool(True)
+		isGamepad2Done = bool(True)
+		isGamepad3Done = bool(True)
+		isGamepad4Done = bool(True)
+		exit()
+
+while isGamepad2Done == False:
+	print("Checking: (" + controllerPath + str(eventNum) + ") for gamepad2")
+	try:
+		gamepad2 = InputDevice(controllerPath + str(eventNum))
+		isGamepad2 = bool(True)
+	except:
+		print("Tried to assign gamepad as an invalid device")
+		eventNum += 1
+	
+	#found a valid device, checking if controller is recognized
+	if isGamepad2 == True:
+		if (gamepad2.name == gpPS3 or gamepad2.name == gpGC or gamepad2.name == gpSwitchPro or gamepad2.name == gpSwitchPro2 or gamepad2.name == gpSega or gamepad2.name == gpLogitech or gamepad2.name == gpXBOX1):
+			print("gamepad2 is = "+ gamepad2.name)
+			isGamepad2Done = bool(True)
+			eventNum += 1
+		else :
+			print("Input device not recognized within the whitelist")
+			eventNum += 1
+			isGamepad2 = bool(False)
+	
+	#stop looking for controllers beyond event30
+	if eventNum >= 30:
+		print("Could not find a valid controller to assign to gamepad2")
+		isGamepad2Done = bool(True)
+		isGamepad3Done = bool(True)
+		isGamepad4Done = bool(True)
+
+while isGamepad3Done == False:
+	print("Checking: (" + controllerPath + str(eventNum) + ") for gamepad3")
+	try:
+		gamepad3 = InputDevice(controllerPath + str(eventNum))
+		isGamepad3 = bool(True)
+	except:
+		print("Tried to assign gamepad as an invalid device")
+		eventNum += 1
+	
+	#found a valid device, checking if controller is recognized
+	if isGamepad3 == True:
+		if (gamepad3.name == gpPS3 or gamepad3.name == gpGC or gamepad3.name == gpSwitchPro or gamepad3.name == gpSwitchPro2 or gamepad3.name == gpSega or gamepad3.name == gpLogitech or gamepad3.name == gpXBOX1):
+			print("gamepad3 is = "+ gamepad3.name)
+			isGamepad3Done = bool(True)
+			eventNum += 1
+		else :
+			print("Input device not recognized within the whitelist")
+			eventNum += 1
+			isGamepad3 = bool(False)
+	
+	#stop looking for controllers beyond event30
+	if eventNum >= 30:
+		print("Could not find a valid controller to assign to gamepad3")
+		isGamepad3Done = bool(True)
+		isGamepad4Done = bool(True)
+
+while isGamepad4Done == False:
+	print("Checking: (" + controllerPath + str(eventNum) + ") for gamepad4")
+	try:
+		gamepad4 = InputDevice(controllerPath + str(eventNum))
+		isGamepad4 = bool(True)
+	except:
+		print("Tried to assign gamepad as an invalid device")
+		eventNum += 1
+	
+	#found a valid device, checking if controller is recognized
+	if isGamepad4 == True:
+		if (gamepad4.name == gpPS3 or gamepad4.name == gpGC or gamepad4.name == gpSwitchPro or gamepad4.name == gpSwitchPro2 or gamepad4.name == gpSega or gamepad4.name == gpLogitech or gamepad4.name == gpXBOX1):
+			print("gamepad4 is = "+ gamepad4.name)
+			isGamepad4Done = bool(True)
+		else :
+			print("Input device not recognized within the whitelist")
+			eventNum += 1
+			isGamepad4 = bool(False)
+	
+	#stop looking for controllers beyond event30
+	if eventNum >= 30:
+		print("could not find a valid controller to assign to gamepad4")
+		isGamepad4Done = bool(True)
 
 #assigning buttons based on controller being used
-if gamepad.name == gpPS3:
+if gamepad1.name == gpPS3:
 	buttonHotkey = 296
 	buttonStart = 297
 	buttonRThmb = 299
-elif gamepad.name == gpGC:
+elif gamepad1.name == gpGC:
 	buttonHotkey = 295
 	buttonStart = 297
-elif gamepad.name == gpSwitchPro or gamepad.name == gpSwitchPro2:
+elif gamepad1.name == gpSwitchPro or gamepad1.name == gpSwitchPro2:
 	buttonHotkey = 312
 	buttonStart = 313
 	buttonRThmb = 315
-elif gamepad.name == gpSega:
+elif gamepad1.name == gpSega:
 	buttonHotkey = 296
 	buttonStart = 297
-elif gamepad.name == gpXBOX1:
+elif gamepad1.name == gpXBOX1:
 	buttonHotkey = 314
 	buttonStart = 315
 	buttonRThmb = 318
-elif gamepad.name == gpLogitech:
+elif gamepad1.name == gpLogitech:
 	buttonHotkey = 314
 	buttonStart = 315
 	buttonRThmb = 318
@@ -71,18 +165,71 @@ elif gamepad.name == gpLogitech:
 #settings configs for appropriate conditions
 if activeEmu == 'gc':
 	#assinging appropriate controller config file
-	oldConfigGP = '/opt/retropie/configs/gc/Config'
-	os.remove(oldConfigGP + '/GCPadNew.ini')
-	if gamepad.name == gpSwitchPro:
-		newConfigGP = '/opt/retropie/configs/gc/Config/Controllers/switchPro/GCPadNew.ini'
-	elif gamepad.name == gpSwitchPro2:
-		newConfigGP = '/opt/retropie/configs/gc/Config/Controllers/switchPro2/GCPadNew.ini'
-	elif gamepad.name == gpPS3:
-		newConfigGP = '/opt/retropie/configs/gc/Config/Controllers/ps3/GCPadNew.ini'
-	else:
-		newConfigGP = '/opt/retropie/configs/gc/Config/Controllers/default/GCPadNew.ini'
+	gcGPConfig = '/opt/retropie/configs/gc/Config/GCPadNew.ini'
+	gcGPPS3 = '/opt/retropie/configs/gc/Config/Controllers/ps3/GCPadNew.ini'
+	gcGPSP = '/opt/retropie/configs/gc/Config/Controllers/switchPro/GCPadNew.ini'
+	gcGPSP2 = '/opt/retropie/configs/gc/Config/Controllers/switchPro2/GCPadNew.ini'
+	gcGPDefault = '/opt/retropie/configs/gc/Config/Controllers/default/GCPadNew.ini'
 
-	shutil.copy(newConfigGP, oldConfigGP)
+	if gamepad1.name == gpPS3:
+		with open(gcGPPS3, 'r') as file:
+			gcGPString = "[GCPAD1]" + "\n" + file.read()
+	elif gamepad1.name == gpSwitchPro:
+		with open(gcGPSP, 'r') as file:
+			gcGPString = "[GCPAD1]" + "\n" + file.read()
+	elif gamepad1.name == gpSwitchPro2:
+		with open(gcGPSP2, 'r') as file:
+			gcGPString = "[GCPAD1]" + "\n" + file.read()
+	else:
+		with open(gcGPDefault, 'r') as file:
+			gcGPString = "[GCPAD1]" + "\n" + file.read()
+
+	if isGamepad2 == True:
+		if gamepad2.name == gpPS3:
+			with open(gcGPPS3, 'r') as file:
+				gcGPString += "\n" + "[GCPAD2]" + "\n" + file.read()
+		elif gamepad2.name == gpSwitchPro:
+			with open(gcGPSP, 'r') as file:
+				gcGPString += "\n" + "[GCPAD2]" + "\n" + file.read()
+		elif gamepad2.name == gpSwitchPro2:
+			with open(gcGPSP2, 'r') as file:
+				gcGPString += "\n" + "[GCPAD2]" + "\n" + file.read()
+		else:
+			with open(gcGPDefault, 'r') as file:
+				gcGPString += "\n" + "[GCPAD2]" + "\n" + file.read()
+	
+	if isGamepad3 == True:
+		if gamepad3.name == gpPS3:
+			with open(gcGPPS3, 'r') as file:
+				gcGPString += "\n" + "[GCPAD3]" + "\n" + file.read()
+		elif gamepad3.name == gpSwitchPro:
+			with open(gcGPSP, 'r') as file:
+				gcGPString += "\n" + "[GCPAD3]" + "\n" + file.read()
+		elif gamepad3.name == gpSwitchPro2:
+			with open(gcGPSP2, 'r') as file:
+				gcGPString += "\n" + "[GCPAD3]" + "\n" + file.read()
+		else:
+			with open(gcGPDefault, 'r') as file:
+				gcGPString += "\n" + "[GCPAD3]" + "\n" + file.read()
+	
+	if isGamepad4 == True:
+		if gamepad4.name == gpPS3:
+			with open(gcGPPS3, 'r') as file:
+				gcGPString += "\n" + "[GCPAD4]" + "\n" + file.read()
+		elif gamepad4.name == gpSwitchPro:
+			with open(gcGPSP, 'r') as file:
+				gcGPString += "\n" + "[GCPAD4]" + "\n" + file.read()
+		elif gamepad4.name == gpSwitchPro2:
+			with open(gcGPSP2, 'r') as file:
+				gcGPString += "\n" + "[GCPAD4]" + "\n" + file.read()
+		else:
+			with open(gcGPDefault, 'r') as file:
+				gcGPString += "\n" + "[GCPAD4]" + "\n" + file.read()
+	
+	file = open(gcGPConfig, 'w')
+	n = file.write(gcGPString)
+	file.close()
+	print("Tried to write gcGPConfig as" + gcGPString)
 
 elif activeEmu == 'ps2':
 	oldConfig = '/home/toomu/.config/PCSX2/inis'	
@@ -113,12 +260,12 @@ elif activeEmu == 'ps2':
 	procName = '/usr/games/PCSX2'
 			
 #loop and filter by event code and print the mapped label
-for event in gamepad.read_loop():
+for event in gamepad1.read_loop():
 	if event.type == ecodes.EV_KEY:
 		if event.value == 1:
 			# Hotkey Button pressed
 			if event.code == buttonHotkey:
-				for event2 in gamepad.read_loop():
+				for event2 in gamepad1.read_loop():
                     
 					# Hotkey Button released
 					if event2.code == buttonHotkey:
@@ -151,6 +298,3 @@ for event in gamepad.read_loop():
 									if procQjoypad in process.cmdline():
 										process.terminate()
 						break
-						
-		
-		     	
