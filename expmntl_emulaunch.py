@@ -169,6 +169,9 @@ if activeEmu == 'gc':
 	gcGPPS3 = '/opt/retropie/configs/gc/Config/Controllers/ps3/GCPadNew.ini'
 	gcGPSP = '/opt/retropie/configs/gc/Config/Controllers/switchPro/GCPadNew.ini'
 	gcGPSP2 = '/opt/retropie/configs/gc/Config/Controllers/switchPro2/GCPadNew.ini'
+	gcGPLogitech = '/opt/retropie/configs/gc/Config/Controllers/logitech/GCPadNew.ini'
+	gcGPXBOX1 = '/opt/retropie/configs/gc/Config/Controllers/xbox1/GCPadNew.ini'
+	gcGPGamecube = '/opt/retropie/configs/gc/Config/Controllers/gamecube/GCPadNew.ini'
 	gcGPDefault = '/opt/retropie/configs/gc/Config/Controllers/default/GCPadNew.ini'
 
 	if gamepad1.name == gpPS3:
@@ -179,6 +182,15 @@ if activeEmu == 'gc':
 			gcGPString = "[GCPAD1]" + "\n" + file.read()
 	elif gamepad1.name == gpSwitchPro2:
 		with open(gcGPSP2, 'r') as file:
+			gcGPString = "[GCPAD1]" + "\n" + file.read()
+	elif gamepad1.name == gpLogitech:
+		with open(gcGPLogitech, 'r') as file:
+			gcGPString = "[GCPAD1]" + "\n" + file.read()
+	elif gamepad1.name == gpXBOX1:
+		with open(gcGPXBOX1, 'r') as file:
+			gcGPString = "[GCPAD1]" + "\n" + file.read()
+	elif gamepad1.name == gpGC:
+		with open(gcGPGamecube, 'r') as file:
 			gcGPString = "[GCPAD1]" + "\n" + file.read()
 	else:
 		with open(gcGPDefault, 'r') as file:
@@ -194,6 +206,15 @@ if activeEmu == 'gc':
 		elif gamepad2.name == gpSwitchPro2:
 			with open(gcGPSP2, 'r') as file:
 				gcGPString += "\n" + "[GCPAD2]" + "\n" + file.read()
+		elif gamepad2.name == gpLogitech:
+			with open(gcGPLogitech, 'r') as file:
+				gcGPString += "\n" + "[GCPAD2]" + "\n" + file.read()
+		elif gamepad2.name == gpXBOX1:
+			with open(gcGPXBOX1, 'r') as file:
+				gcGPString += "\n" + "[GCPAD2]" + "\n" + file.read()
+		elif gamepad2.name == gpGC:
+			with open(gcGPGamecube, 'r') as file:
+				gcGPString += "\n" + "[GCPAD2]" + "\n" + file.read()
 		else:
 			with open(gcGPDefault, 'r') as file:
 				gcGPString += "\n" + "[GCPAD2]" + "\n" + file.read()
@@ -208,6 +229,15 @@ if activeEmu == 'gc':
 		elif gamepad3.name == gpSwitchPro2:
 			with open(gcGPSP2, 'r') as file:
 				gcGPString += "\n" + "[GCPAD3]" + "\n" + file.read()
+		elif gamepad3.name == gpLogitech:
+			with open(gcGPLogitech, 'r') as file:
+				gcGPString += "\n" + "[GCPAD3]" + "\n" + file.read()
+		elif gamepad3.name == gpXBOX1:
+			with open(gcGPXBOX1, 'r') as file:
+				gcGPString += "\n" + "[GCPAD3]" + "\n" + file.read()
+		elif gamepad3.name == gpGC:
+			with open(gcGPGamecube, 'r') as file:
+				gcGPString += "\n" + "[GCPAD3]" + "\n" + file.read()
 		else:
 			with open(gcGPDefault, 'r') as file:
 				gcGPString += "\n" + "[GCPAD3]" + "\n" + file.read()
@@ -221,6 +251,15 @@ if activeEmu == 'gc':
 				gcGPString += "\n" + "[GCPAD4]" + "\n" + file.read()
 		elif gamepad4.name == gpSwitchPro2:
 			with open(gcGPSP2, 'r') as file:
+				gcGPString += "\n" + "[GCPAD4]" + "\n" + file.read()
+		elif gamepad4.name == gpLogitech:
+			with open(gcGPLogitech, 'r') as file:
+				gcGPString += "\n" + "[GCPAD4]" + "\n" + file.read()
+		elif gamepad4.name == gpXBOX1:
+			with open(gcGPXBOX1, 'r') as file:
+				gcGPString += "\n" + "[GCPAD4]" + "\n" + file.read()
+		elif gamepad4.name == gpGC:
+			with open(gcGPGamecube, 'r') as file:
 				gcGPString += "\n" + "[GCPAD4]" + "\n" + file.read()
 		else:
 			with open(gcGPDefault, 'r') as file:
