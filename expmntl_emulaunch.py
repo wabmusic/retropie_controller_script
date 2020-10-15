@@ -1,12 +1,12 @@
 from evdev import uinput, InputDevice, categorize, ecodes
 #from pynput.keyboard import Key, Controller
 import psutil, sys, os, subprocess, shutil
+from subprocess import Popen
 
 #keyboard = Controller()
 activeEmu = sys.argv[1]
 activeROM = sys.argv[2]
 print("activeROM is currently:(" + activeROM + ")")
-from subprocess import Popen
 
 isGamepad1 = bool(False)
 isGamepad2 = bool(False)
@@ -33,12 +33,12 @@ gpLogitech = 'Logitech Gamepad F310'
 
 #assigning gamepads as valid controller devices
 while isGamepad1Done == False:
-	print("Checking: (" + controllerPath + str(eventNum) + ") for gamepad1")		
+	#print("Checking: (" + controllerPath + str(eventNum) + ") for gamepad1")		
 	try:
 		gamepad1 = InputDevice(controllerPath + str(eventNum))
 		isGamepad1 = bool(True)
 	except:
-		print("Tried to assign gamepad as an invalid device")
+		#print("Tried to assign gamepad as an invalid device")
 		eventNum += 1
 	
 	#found a valid device, checking if controller is recognized
@@ -48,7 +48,7 @@ while isGamepad1Done == False:
 			isGamepad1Done = bool(True)
 			eventNum += 1
 		else :
-			print("Input device not recognized within the whitelist")
+			#print("Input device not recognized within the whitelist")
 			eventNum += 1
 			isGamepad1 = bool(False)
 	
@@ -62,12 +62,12 @@ while isGamepad1Done == False:
 		exit()
 
 while isGamepad2Done == False:
-	print("Checking: (" + controllerPath + str(eventNum) + ") for gamepad2")
+	#print("Checking: (" + controllerPath + str(eventNum) + ") for gamepad2")
 	try:
 		gamepad2 = InputDevice(controllerPath + str(eventNum))
 		isGamepad2 = bool(True)
 	except:
-		print("Tried to assign gamepad as an invalid device")
+		#print("Tried to assign gamepad as an invalid device")
 		eventNum += 1
 	
 	#found a valid device, checking if controller is recognized
@@ -77,7 +77,7 @@ while isGamepad2Done == False:
 			isGamepad2Done = bool(True)
 			eventNum += 1
 		else :
-			print("Input device not recognized within the whitelist")
+			#print("Input device not recognized within the whitelist")
 			eventNum += 1
 			isGamepad2 = bool(False)
 	
@@ -89,12 +89,12 @@ while isGamepad2Done == False:
 		isGamepad4Done = bool(True)
 
 while isGamepad3Done == False:
-	print("Checking: (" + controllerPath + str(eventNum) + ") for gamepad3")
+	#print("Checking: (" + controllerPath + str(eventNum) + ") for gamepad3")
 	try:
 		gamepad3 = InputDevice(controllerPath + str(eventNum))
 		isGamepad3 = bool(True)
 	except:
-		print("Tried to assign gamepad as an invalid device")
+		#print("Tried to assign gamepad as an invalid device")
 		eventNum += 1
 	
 	#found a valid device, checking if controller is recognized
@@ -104,7 +104,7 @@ while isGamepad3Done == False:
 			isGamepad3Done = bool(True)
 			eventNum += 1
 		else :
-			print("Input device not recognized within the whitelist")
+			#print("Input device not recognized within the whitelist")
 			eventNum += 1
 			isGamepad3 = bool(False)
 	
@@ -115,12 +115,12 @@ while isGamepad3Done == False:
 		isGamepad4Done = bool(True)
 
 while isGamepad4Done == False:
-	print("Checking: (" + controllerPath + str(eventNum) + ") for gamepad4")
+	#print("Checking: (" + controllerPath + str(eventNum) + ") for gamepad4")
 	try:
 		gamepad4 = InputDevice(controllerPath + str(eventNum))
 		isGamepad4 = bool(True)
 	except:
-		print("Tried to assign gamepad as an invalid device")
+		#print("Tried to assign gamepad as an invalid device")
 		eventNum += 1
 	
 	#found a valid device, checking if controller is recognized
@@ -129,7 +129,7 @@ while isGamepad4Done == False:
 			print("gamepad4 is = "+ gamepad4.name)
 			isGamepad4Done = bool(True)
 		else :
-			print("Input device not recognized within the whitelist")
+			#print("Input device not recognized within the whitelist")
 			eventNum += 1
 			isGamepad4 = bool(False)
 	
@@ -229,7 +229,6 @@ if activeEmu == 'gc':
 	file = open(gcGPConfig, 'w')
 	n = file.write(gcGPString)
 	file.close()
-	print("Tried to write gcGPConfig as" + gcGPString)
 
 elif activeEmu == 'ps2':
 	oldConfig = '/home/toomu/.config/PCSX2/inis'	
