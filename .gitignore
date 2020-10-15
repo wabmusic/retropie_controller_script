@@ -1,0 +1,6 @@
+# ignore everything
+/*
+
+# except my script and gitignore
+!.gitignore
+!expmntl_emulaunch.py
